@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaHub - Stock In/Out</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/general.js" defer></script>
+    <script src="js/stock_In-Out.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>PharmaHub Stock Operations</h1>
+        <p>System Time: <strong id="currentSystemClock">Loading...</strong></p>
+    </header>
+
+    <div class="user_bar">
+        <span>Logged in as: <strong id="sidebarUsername">Administrator</strong></span>
+        <button type="button" id="logoutBtn" class="logout_btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+    </div>
+
+    <nav>
+        <a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="inventory.html"><i class="fa-solid fa-pills"></i> Inventory</a>
+        <a class="active" href="stock_In-Out.html"><i class="fa-solid fa-right-left"></i> Stock In/Out</a>
+        <a href="batches_expiryTracker.html"><i class="fa-solid fa-calendar-days"></i> Batch & Expiry</a>
+        <a href="reports.html"><i class="fa-solid fa-file-invoice-dollar"></i> Reports</a>
+    </nav>
+
+    <main>
+        <!-- Stock In -->
+        <fieldset>
+            <legend>Stock In (Receive Inventory)</legend>
+            <form id="stockInForm">
+                <label for="inCategory">Category</label>
+                <select id="inCategory">
+                    <option value="">-- All Categories --</option>
+                    <option value="Group B">Group B</option>
+                    <option value="Group C">Group C</option>
+                    <option value="Group OTC">Group OTC</option>
+                </select>
+
+                <label for="inMedicineType">Medicine Type</label>
+                <select id="inMedicineType">
+                    <option value="">-- All Medicine Types --</option>
+                </select>
+
+                <label for="inMedicine">Select Medicine *</label>
+                <select id="inMedicine" name="medicine_id" required>
+                    <option value="">-- Choose Medicine --</option>
+                </select>
+
+                <!-- View The Stock Value -->
+                <div class="batch_preview_box">
+                    <strong>Existing Batches:</strong>
+                    <ul id="inBatchList" class="batch_list">
+                        <li class="text-muted">Select a medicine to view batches</li>
+                    </ul>
+                </div>
+
+                <label for="inQty">Quantity *</label>
+                <input type="number" id="inQty" name="quantity" min="1" placeholder="e.g. 50" required>
+
+                <label for="inExpiry">Expiry Date *</label>
+                <input type="date" id="inExpiry" name="expiry_date" required>
+
+                <button type="submit">Submit Stock In <i class="fas fa-arrow-left"></i></button>
+            </form>
+        </fieldset>
+
+        <!-- Stock out -->
+        <fieldset>
+            <legend>Stock Out (Dispense / Deduct)</legend>
+            <form id="stockOutForm">
+                <label for="outCategory">Category</label>
+                <select id="outCategory">
+                    <option value="">-- All Categories --</option>
+                    <option value="Group B">Group B</option>
+                    <option value="Group C">Group C</option>
+                    <option value="Group OTC">Group OTC</option>
+                </select>
+
+                <label for="outMedicineType">Medicine Type</label>
+                <select id="outMedicineType">
+                    <option value="">-- All Medicine Types --</option>
+                </select>
+
+                <label for="outMedicine">Select Medicine *</label>
+                <select id="outMedicine" name="medicine_id" required>
+                    <option value="">-- Choose Medicine --</option>
+                </select>
+
+                <!-- Stock Ou twith Following the Date -->
+                <div class="batch_preview_box">
+                    <strong>Available Batches (Deduct Order):</strong>
+                    <ul id="outBatchList" class="batch_list">
+                        <li class="text-muted">Select a medicine to view batches</li>
+                    </ul>
+                </div>
+
+                <label for="outQty">Deduct Quantity *</label>
+                <input type="number" id="outQty" name="deduct_qty" min="1" placeholder="e.g. 10" required>
+
+                <label for="outReason">Reason *</label>
+                <select id="outReason" name="reason" required>
+                    <option value="Prescription Dispense (Selling)">Prescription Dispense (Selling)</option>
+                    <option value="OTC Retail Sale (Selling)">OTC Retail Sale (Selling)</option>
+                    <option value="Expired Write-off (Loss)">Expired Write-off (Loss)</option>
+                    <option value="Damaged Packaging (Loss)">Damaged Packaging (Loss)</option>
+                </select>
+
+                <button type="submit" class="btn-danger">Confirm Stock Out <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </fieldset>
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2026 PharmaHub System</p>
+    </footer>
+
+</body>
+</html>
